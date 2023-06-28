@@ -62,7 +62,7 @@ def actualizar(id, dni, nombre, edad, profesion, activo):
         cursor.execute(query, [dni, nombre, edad, profesion, activo, id])
         conn.commit()
         conn.close()
-        return f'El trabajador {dni} : {nombre} fue dactualizado con exito!'
+        return f'El trabajador {dni} : {nombre} fue actualizado con exito!'
 
     except sql.OperationalError as error:
         return error

@@ -1,119 +1,33 @@
-
-from gestionar import altaTrabajador, modificarTrabajador, eliminarTrabajador, status
-from tryExcept import tryExceptOptions
-import os
-from reportes import trabajadorActivo, trabajadorDesocupados, trabajadorRangoEdad, trabajadorProfesion
-from decoraciones import decorar, info
+import tkinter as tk
+from gestionar import status, gestion
+from reportes import reporte
 from base import createTabla
 createTabla()
 
+ventanaPrincipal = tk.Tk()
+ventanaPrincipal.title('Menú Principal')
+ventanaPrincipal.geometry('500x300')
+ventanaPrincipal.configure(background='grey')
 
-while True:
-    os.system("cls")
-    print("""
+titulo = tk.Label(ventanaPrincipal, text='''
         ┌──────────────────────────┐
-        │ TRABAJO PRACTICO GRUPO A │
-        │   CONSULTORA DE TRABAJO  │
-        │   CURSO CODO A CODO 4.0  │
-        └──────────────────────────┘\n
-        ┌──────────────────────────┐
-        │     Menú Principal       │ 
-        └──────────────────────────┘\n                   
-       ┌───────────────────────────────────┐
-       │ [1] Gestion de trabajadores       │
-       │ [2] Reportes                      │
-       │ [3] Cambiar status del trabajador │
-       │ [4] Salir                         │
-       └───────────────────────────────────┘
-    """)
+          TRABAJO PRACTICO GRUPO A  
+            CONSULTORA DE TRABAJO   
+            CURSO CODO A CODO 4.0   
+        └──────────────────────────┘
+    ''', bg='white', fg='black')
+titulo.pack(padx=5, pady=5, ipadx=5, ipady=5)
+btnGestion = tk.Button(ventanaPrincipal, text='Gestion de trabajadores',
+                       fg='blue', command=gestion)
+btnGestion.pack(side=tk.TOP)
+btnReportes = tk.Button(ventanaPrincipal, text='Reportes',
+                        fg='blue', command=reporte)
+btnReportes.pack(side=tk.TOP)
+btnStatus = tk.Button(ventanaPrincipal, text='Cambiar status del trabajador',
+                      fg='blue', command=status)
+btnStatus.pack(side=tk.TOP)
+btnSalir = tk.Button(ventanaPrincipal, text='Salir',
+                     fg='blue', command=ventanaPrincipal.destroy)
+btnSalir.pack(side=tk.TOP)
 
-    opcion = tryExceptOptions()
-    if opcion == 4:
-        break
-
-    elif opcion == 1:
-        os.system("cls")
-        while True:
-            print("""
-                ┌───────────────────────────────────┐
-                │     Gestion de trabajadores       │
-                └───────────────────────────────────┘\n
-                ┌──────────────────────────────────────┐
-                │ [1] Ingresar nuevo trabajador        │
-                │ [2] Modificar datos de un trabajador │
-                │ [3] Eliminar trabajador              │
-                │ [4] Volver al Menu Principal         │
-                └──────────────────────────────────────┘
-                """)
-        
-            opcion = tryExceptOptions()
-            if opcion == 4:
-                break
-
-            elif opcion == 1:
-                altaTrabajador()
-                decorar()
-                os.system("pause")
-            
-            elif opcion == 2:
-                decorar()
-                modificarTrabajador()
-                os.system("pause")
-            
-            elif opcion == 3:
-                #dni = tryExceptOptions("Ingrese DNI del trabajador que quiere eliminar: ")
-                decorar()
-                eliminarTrabajador() 
-                os.system("pause")
-
-    elif opcion == 2:
-        os.system("cls")
-        while True:
-            
-            info('REPORTES')
-                
-            print("""
-                ┌──────────────────────────────────────────────┐
-                │  [1] Mostrar trabajadores Activos            │
-                │  [2] Mostrar trabajadores Desocupados        │
-                │  [3] Mostrar Desocupados en un rango de edad │
-                │  [4] Mostrar trabajadores segun su Profesion │
-                │  [5] Volver al Menu Principal                │
-                └──────────────────────────────────────────────┘\n
-                """)
-            opcion = tryExceptOptions()
-            if opcion == 5:
-                break
-
-            elif opcion == 1:
-                decorar()
-                trabajadorActivo()
-                os.system("pause")
-
-            elif opcion == 2:
-                decorar()
-                trabajadorDesocupados()
-                os.system("pause")
-
-            elif opcion == 3:
-                decorar()
-                trabajadorRangoEdad()
-                os.system("pause")
-
-            elif opcion == 4:
-                decorar()
-                trabajadorProfesion()
-                os.system("pause")
-
-    elif opcion == 3:
-        decorar()
-        status()
-        print("El Status fue actualizado")
-        os.system("pause")
-
-os.system("cls")
-print("""
-     ┌─────────────────────────┐
-     │    Fin del Programa     │
-     └─────────────────────────┘\n
-    """)
+ventanaPrincipal.mainloop()

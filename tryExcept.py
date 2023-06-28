@@ -1,34 +1,18 @@
 import re
+import tkinter as tk
+from tkinter import messagebox
 
-def tryExceptOptions(mensaje="Elija una opcion: "):
-    while True:
+def tryExceptOptions(ingreso):    
         try:
-            opcion = int(input(mensaje))
+            opcion = int(ingreso)
             return opcion
         except ValueError:
-            print('\n\tALERTA: Ingresa un numero valido!\n')    
+            messagebox.showwarning('ALERTA', 'Ingresa solo numeros!') 
 
 
-def tryExceptNumero(mensaje):
-    opcion = ''
-    while True:
-        try:
-            ingreso = input(mensaje)
-            if ingreso:
-                opcion = int(ingreso)
-                return opcion
-            else:
-                return opcion
-        except ValueError:
-            print('\n\tALERTA: Ingresa un numero valido!\n')    
-
-
-def matchLetras(mensaje):
-    while True:
-        nombre = input(mensaje)
+def matchLetras(ingreso):
         # solo letras
-        if re.match("^[A-Za-z áéíóúÁÉÍÓÚñÑ]*$", nombre):
-            return nombre
-            break
+        if re.match("^[A-Za-z áéíóúÁÉÍÓÚñÑ]*$", ingreso):
+            return ingreso
         else:
-            print('\n\tALERTA: Ingresa no valido!\n')
+            messagebox.showwarning('ALERTA', 'Ingresa solo letras!')
